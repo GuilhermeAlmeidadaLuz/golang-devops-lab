@@ -1,58 +1,80 @@
-# HTTP Server em Golang/Gin Gonic
+# Golang HTTP Service & DevOps Environment
 
-Serviço em Golang utilizando o framework Gin Gonic e Docker/Docker Compose para aplicar conceitos e ferramentas da cultura DevOps. O desafio proposto visa a execução em containers e automação de processos.
+Serviço em Golang utilizando o framework **Gin Gonic** e **Docker / Docker Compose** para aplicar conceitos e ferramentas da cultura DevOps. O projeto foca em conteinerização, isolamento de ambiente e automação de processos de entrega de software.
 
-> :flag-us: 🇺🇸 Service in Golang using Gin Gonic framework and Docker/Docker Compose for apply DevOps Culture concepts and tools. The challenge aims to run in containers and automate process.
-> You can view the [ENGLISH-README.md](./ENGLISH-README.md) for follow the steps to run.
+> 🇺🇸 **English Version Available:** Service in Golang using Gin Gonic framework and Docker/Docker Compose to apply DevOps Culture concepts and tools. You can check [ENGLISH-README.md](./ENGLISH-README.md) for instructions in English.
 
-## Informação
+---
 
-- **Título**: HTTP Server em Golang/Gin Gonic
-- **Version**: 1.0
-- **Host**: localhost:80
+## 📌 Informações Gerais
 
-## Pré-requisitos
+- **Título:** HTTP Server em Golang/Gin Gonic
+- **Versão:** 1.0.0
+- **Host Local:** `http://localhost:80`
+- **Tecnologias:** Go (Golang), Gin Gonic, Docker, Docker Compose, Linux, Git
 
-Antes de começar, tenha certeza que você possui os seguintes pré-requisitos instalados em seu sistema:
+---
 
-- [Go](https://go.dev/doc/install): Liguagem de Programação Go. Necessária para execução e compilação de arquivos com extensão ```.go```
-- [Docker](https://docs.docker.com/get-started/get-docker/): Necessário para execução da aplicação dentro de um container (```ambiente isolado com os pré-requisitos já garantidos```)
+## 🚀 Status do Projeto & Roadmap
 
-## Instalação
+- [x] **Fase 1: Aplicação & Conteinerização**
+  - Servidor HTTP e rotas em Go com Gin Gonic.
+  - Conteinerização da aplicação via `Dockerfile`.
+  - Orquestração de ambiente local com `docker-compose` na porta 80.
+  - Retorno de payload JSON com dados da requisição e horário do servidor.
+- [ ] **Fase 2: Observabilidade & Métricas**
+  - Integração de middleware para exposição de métricas do Prometheus (`/metrics`).
+  - Coleta de métricas e exibição via dashboards no Grafana.
+- [ ] **Fase 3: Automação & Provisionamento**
+  - Criação de playbooks do **Ansible** para automação de setup e deploy no host.
 
-Siga os passos abaixo para instalar o projeto em seu ambiente de desenvolvimento:
+---
+
+## 💻 Pré-requisitos
+
+Antes de iniciar, certifique-se de ter as seguintes ferramentas instaladas no seu ambiente:
+
+* [Go](https://go.dev/doc/install) *(v1.20+)* — Linguagem de programação para execução e compilação local (opcional se utilizar apenas Docker).
+* [Docker](https://docs.docker.com/get-started/get-docker/) & [Docker Compose](https://docs.docker.com/compose/) — Necessários para a execução e orquestração do container em ambiente isolado.
+
+---
+
+## ⚙️ Instalação e Execução
+
+Siga os passos abaixo para subir a aplicação localmente:
 
 1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/GuilhermeAlmeidadaLuz/golang-devops-lab.git
+   ```
+
+2. Acesse o diretório do projeto:
 
     ```bash
-        git clone https://github.com/GuilhermeAlmeidadaLuz/desafio-devops-junior-korp.git
-    ```
-2. **Navegue para a pasta/diretório do projeto**
-    ```bash
-        cd desafio-devops-junior-korp
-    ```
-3. **Build (Construção) da aplicação usando Docker Compose:**
-    ```bash
-        docker compose up 
-        # faz o build (construção a partir das imagens) e inicia todos os containers necessários para a aplicação funcionar
+    cd golang-devops-lab
     ```
 
-## Parte 1:
-### Testando a aplicação
-
-1. **Usando [curl](https://curl.se/docs/tutorial.html) para acessar o endpoint:**
+3. Suba os containers com Docker Compose:
 
     ```bash
-        curl http://localhost:80/projeto-korp
+    docker compose up --build
+    # O comando faz o build da imagem, resolve as dependências e inicia o servidor HTTP exposto na porta 80.
     ```
-2. **Usando o navegador para acessar o endpoint:**
-    
-    - Digite na url `http://localhost:80/projeto-korp`
 
-3. **Resultado esperado:**
+## 🧪 Testando a Aplicação
+Com os containers ativos, você pode validar o funcionamento do endpoint das seguintes formas:
+
+1. Via cURL (Terminal)
     ```bash
-        {
-        "nome": "Projeto Korp",
-        "horario": "<horário_atual>"
-        }
+    curl http://localhost:80/projeto-korp
     ```
+2. Via Navegador
+    Acesse a URL: http://localhost:80/projeto-korp
+
+📝 Resultado Esperado
+```JSON
+    {
+      "nome": "Projeto Korp",
+      "horario": "2026-10-09T16:36:10Z"
+    }
+```
